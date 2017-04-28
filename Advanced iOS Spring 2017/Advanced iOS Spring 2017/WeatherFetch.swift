@@ -10,9 +10,8 @@ import Foundation
 
 class WeatherFetch {
     
-    private let openWeatherMapBaseURL = "http://api.openweathermap.org/data/2.5/boogity"
-    private let openWeatherMapAPIKey = "Y0URK3YG03SH3R3"
-    
+    private let openWeatherMapBaseURL = "http://api.openweathermap.org/data/2.5/weather"
+    private let openWeatherMapAPIKey = "d6b89ac8b143cdeb1de7a193a44c70c5"
     func getWeather(city: String) {
         
         // This is a pretty simple networking task, so the shared session will do.
@@ -21,17 +20,21 @@ class WeatherFetch {
         let weatherRequestURL = URL(string: "\(openWeatherMapBaseURL)?APPID=\(openWeatherMapAPIKey)&q=\(city)")!
         
         // The data task retrieves the data.
-        let dataTask = session.dataTask(with: weatherRequestURL) {
+        let dataTask = session.dataTask(with: weatherRequestURL)
+        {
             (data:Data?, response:URLResponse?, error:Error?) in
-            if let error = error {
+            if let error = error
+            {
                 // Server has returned an error
                 print("Error:\n\(error)")
-            
-            else {
+                
+            }            else
+                {
                 // Server has returned data
                 print("Raw data:\n\(data!)\n")
                 let dataString = String(data: data!, encoding: String.Encoding.utf8)
                 print("Human-readable data:\n\(data!)")
+                    print("Human-readable data:\n\(dataString!)")
             }
         }
         dataTask.resume()
